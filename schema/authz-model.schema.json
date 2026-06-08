@@ -1,0 +1,400 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.extratoast.com/authz-model.schema.json",
+  "title": "ExtraToast authorization vocabulary model",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "modelId",
+    "version",
+    "description",
+    "authorityFormats",
+    "artifacts",
+    "roles",
+    "claims",
+    "permissions",
+    "groups",
+    "hostGates",
+    "unmappedHostBehavior"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "modelId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9.-]*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authorityFormats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rolePrefix",
+        "servicePermissionPrefix",
+        "rolesHeaderSeparator"
+      ],
+      "properties": {
+        "rolePrefix": {
+          "type": "string",
+          "const": "ROLE_"
+        },
+        "servicePermissionPrefix": {
+          "type": "string",
+          "const": "SERVICE_"
+        },
+        "rolesHeaderSeparator": {
+          "type": "string",
+          "const": ","
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maven",
+        "typescript"
+      ],
+      "properties": {
+        "maven": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "groupId",
+            "artifactId",
+            "packageName"
+          ],
+          "properties": {
+            "groupId": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9]*)*$"
+            },
+            "artifactId": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9-]*$"
+            },
+            "packageName": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9]*)*$"
+            }
+          }
+        },
+        "typescript": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "packageName"
+          ],
+          "properties": {
+            "packageName": {
+              "type": "string",
+              "pattern": "^@[a-z0-9-]+/[a-z][a-z0-9-]*$"
+            }
+          }
+        }
+      }
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/role"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "permissions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/permission"
+      }
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/group"
+      }
+    },
+    "hostGates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/hostGate"
+      }
+    },
+    "unmappedHostBehavior": {
+      "type": "string",
+      "const": "no-vocabulary-decision"
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9.-]*$"
+    },
+    "recordMetadata": {
+      "type": "object",
+      "required": [
+        "id",
+        "description",
+        "namespace",
+        "owner",
+        "scope",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "namespace": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "shared",
+            "consumer-specific"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "deprecated",
+            "replaced",
+            "removed"
+          ]
+        },
+        "replacementId": {
+          "$ref": "#/$defs/id"
+        }
+      }
+    },
+    "upperKey": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]*$"
+    },
+    "claimKey": {
+      "type": "string",
+      "pattern": "^[a-z][A-Za-z0-9]*$"
+    },
+    "role": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/recordMetadata"
+        },
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "authorityValue"
+          ],
+          "properties": {
+            "key": {
+              "$ref": "#/$defs/upperKey"
+            },
+            "authorityValue": {
+              "type": "string",
+              "pattern": "^ROLE_[A-Z][A-Z0-9_]*$"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "claim": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/recordMetadata"
+        },
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "name",
+            "channel",
+            "valueShape"
+          ],
+          "properties": {
+            "key": {
+              "$ref": "#/$defs/claimKey"
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "channel": {
+              "type": "string",
+              "enum": [
+                "jwt-claim",
+                "http-header",
+                "authority"
+              ]
+            },
+            "valueShape": {
+              "type": "string",
+              "enum": [
+                "string",
+                "string-array",
+                "boolean",
+                "authority-array",
+                "comma-separated-authorities",
+                "hostname",
+                "token-type"
+              ]
+            },
+            "allowedAuthorityFormats": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "role",
+                  "service-permission"
+                ]
+              },
+              "uniqueItems": true
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "permission": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/recordMetadata"
+        },
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "authorityValue"
+          ],
+          "properties": {
+            "key": {
+              "$ref": "#/$defs/upperKey"
+            },
+            "authorityValue": {
+              "type": "string",
+              "pattern": "^SERVICE_[A-Z][A-Z0-9_]*$"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "groupCause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "key"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "role",
+            "permission"
+          ]
+        },
+        "key": {
+          "$ref": "#/$defs/upperKey"
+        }
+      }
+    },
+    "group": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/recordMetadata"
+        },
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "value",
+            "causes"
+          ],
+          "properties": {
+            "key": {
+              "$ref": "#/$defs/upperKey"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9_-]*$"
+            },
+            "causes": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/groupCause"
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "hostGate": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/recordMetadata"
+        },
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "permissionKey",
+            "aliases"
+          ],
+          "properties": {
+            "key": {
+              "$ref": "#/$defs/upperKey"
+            },
+            "permissionKey": {
+              "$ref": "#/$defs/upperKey"
+            },
+            "aliases": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]*$"
+              },
+              "uniqueItems": true
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "authz-model-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/typescript"
+  ],
+  "scripts": {
+    "validate": "node tools/generator/validate.mjs",
+    "generate": "node tools/generator/generate.mjs",
+    "check:generated": "node tools/generator/check-generated.mjs",
+    "typecheck": "npm --workspace packages/typescript run typecheck",
+    "build:typescript": "npm --workspace packages/typescript run build"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "typescript": "^5.9.3"
+  }
+}
