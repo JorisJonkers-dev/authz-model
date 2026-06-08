@@ -53,8 +53,8 @@ jobs:
           java-version: "21"
           cache: gradle
 
-      - name: Test Kotlin package
-        run: ./gradlew test --no-daemon
+      - name: Check Kotlin package
+        run: ./gradlew check --no-daemon
 
   pipeline-complete:
     name: Pipeline Complete
