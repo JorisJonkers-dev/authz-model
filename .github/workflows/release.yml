@@ -17,10 +17,21 @@ jobs:
       release_created: ${{ steps.release-please.outputs.release_created }}
       tag_name: ${{ steps.release-please.outputs.tag_name }}
     steps:
+      # Author the release PR with the personal-stack-agents App token (not the
+      # default GITHUB_TOKEN) so CI runs on the PR without a manual approval
+      # gate. Best-effort: falls back to GITHUB_TOKEN when the App secrets or
+      # installation are absent.
+      - uses: actions/create-github-app-token@v2
+        id: app-token
+        continue-on-error: true
+        with:
+          app-id: ${{ secrets.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
       - name: Create or update release
         id: release-please
         uses: googleapis/release-please-action@v4
         with:
+          token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           release-type: simple
           package-name: authz-model
 
