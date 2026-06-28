@@ -10,12 +10,12 @@
   },
   "artifacts": {
     "maven": {
-      "groupId": "com.extratoast",
+      "groupId": "dev.jorisjonkers",
       "artifactId": "authz-model",
-      "packageName": "com.extratoast.authz.model"
+      "packageName": "dev.jorisjonkers.authz.model"
     },
     "typescript": {
-      "packageName": "@extratoast/authz-model"
+      "packageName": "@jorisjonkers-dev/authz-model"
     }
   },
   "roles": [

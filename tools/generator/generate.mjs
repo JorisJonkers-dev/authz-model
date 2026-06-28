@@ -5,7 +5,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { validateModel } from "./validate.mjs";
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const KOTLIN_OUTPUT = "packages/kotlin/src/generated/kotlin/com/extratoast/authz/model/AuthzVocabulary.kt";
+const KOTLIN_OUTPUT = "packages/kotlin/src/generated/kotlin/dev/jorisjonkers/authz/model/AuthzVocabulary.kt";
 const TYPESCRIPT_OUTPUT = "packages/typescript/src/generated/authz-vocabulary.ts";
 
 export async function generate({
@@ -122,70 +122,62 @@ public object AuthzVocabulary {
         return HostGates.ALIAS_TO_PERMISSION_KEY[normalized]
     }
 
-    public fun permissionKeyForHost(host: String?): String? =
-        permissionKeyForHostAlias(host?.substringBefore("."))
+    public fun permissionKeyForHost(host: String?): String? = permissionKeyForHostAlias(host?.substringBefore("."))
 
     public object RoleKeys {
 ${model.roles.map((role) => `        public const val ${role.key}: String = ${kotlinString(role.key)}`).join("\n")}
-        public val ALL: List<String> = listOf(${model.roles.map((role) => role.key).join(", ")})
+${renderKotlinPropertyList("ALL", "List<String>", model.roles.map((role) => role.key), 8)}
     }
 
     public object RoleAuthorities {
 ${model.roles.map((role) => `        public const val ${role.key}: String = ${kotlinString(role.authorityValue)}`).join("\n")}
-        public val ALL: List<String> = listOf(${model.roles.map((role) => role.key).join(", ")})
+${renderKotlinPropertyList("ALL", "List<String>", model.roles.map((role) => role.key), 8)}
     }
 
     public object ClaimNames {
 ${model.claims.map((claim) => `        public const val ${constantName(claim.key)}: String = ${kotlinString(claim.name)}`).join("\n")}
-        public val ALL: List<String> = listOf(${model.claims.map((claim) => constantName(claim.key)).join(", ")})
+${renderKotlinPropertyList("ALL", "List<String>", model.claims.map((claim) => constantName(claim.key)), 8)}
     }
 
     public object PermissionKeys {
 ${model.permissions.map((permission) => `        public const val ${permission.key}: String = ${kotlinString(permission.key)}`).join("\n")}
-        public val ALL: List<String> = listOf(${model.permissions.map((permission) => permission.key).join(", ")})
+${renderKotlinPropertyList("ALL", "List<String>", model.permissions.map((permission) => permission.key), 8)}
     }
 
     public object PermissionAuthorities {
 ${model.permissions.map((permission) => `        public const val ${permission.key}: String = ${kotlinString(permission.authorityValue)}`).join("\n")}
-        public val ALL: List<String> = listOf(${model.permissions.map((permission) => permission.key).join(", ")})
+${renderKotlinPropertyList("ALL", "List<String>", model.permissions.map((permission) => permission.key), 8)}
     }
 
     public object GroupValues {
 ${model.groups.map((group) => `        public const val ${group.key}: String = ${kotlinString(group.value)}`).join("\n")}
-        public val ALL: List<String> = listOf(${model.groups.map((group) => group.key).join(", ")})
+${renderKotlinPropertyList("ALL", "List<String>", model.groups.map((group) => group.key), 8)}
     }
 
     public object Roles {
-        public val ALL: List<AuthzRoleRecord> = listOf(
-${model.roles.map((role) => `            ${renderKotlinRole(role)}`).join(",\n")}
-        )
+${renderKotlinPropertyList("ALL", "List<AuthzRoleRecord>", model.roles.map(renderKotlinRole), 8)}
     }
 
     public object Claims {
-        public val ALL: List<AuthzClaimRecord> = listOf(
-${model.claims.map((claim) => `            ${renderKotlinClaim(claim)}`).join(",\n")}
-        )
+${renderKotlinPropertyList("ALL", "List<AuthzClaimRecord>", model.claims.map(renderKotlinClaim), 8)}
     }
 
     public object Permissions {
-        public val ALL: List<AuthzPermissionRecord> = listOf(
-${model.permissions.map((permission) => `            ${renderKotlinPermission(permission)}`).join(",\n")}
-        )
+${renderKotlinPropertyList("ALL", "List<AuthzPermissionRecord>", model.permissions.map(renderKotlinPermission), 8)}
     }
 
     public object Groups {
-        public val ALL: List<AuthzGroupRecord> = listOf(
-${model.groups.map((group) => `            ${renderKotlinGroup(group)}`).join(",\n")}
-        )
+${renderKotlinPropertyList("ALL", "List<AuthzGroupRecord>", model.groups.map(renderKotlinGroup), 8)}
     }
 
     public object HostGates {
-        public val ALL: List<AuthzHostGateRecord> = listOf(
-${model.hostGates.map((hostGate) => `            ${renderKotlinHostGate(hostGate)}`).join(",\n")}
-        )
-        public val ALIAS_TO_PERMISSION_KEY: Map<String, String> = mapOf(
-${aliases.map(([alias, permissionKey]) => `            ${kotlinString(alias)} to PermissionKeys.${permissionKey}`).join(",\n")}
-        )
+${renderKotlinPropertyList("ALL", "List<AuthzHostGateRecord>", model.hostGates.map(renderKotlinHostGate), 8)}
+${renderKotlinPropertyMap(
+  "ALIAS_TO_PERMISSION_KEY",
+  "Map<String, String>",
+  aliases.map(([alias, permissionKey]) => `${kotlinString(alias)} to PermissionKeys.${permissionKey}`),
+  8
+)}
     }
 }
 `;
@@ -335,25 +327,127 @@ export function permissionKeyForHost(host: string | null | undefined): Permissio
 }
 
 function renderKotlinRole(role) {
-  return `AuthzRoleRecord(id = ${kotlinString(role.id)}, key = ${kotlinString(role.key)}, authorityValue = ${kotlinString(role.authorityValue)}, description = ${kotlinString(role.description)}, namespace = ${kotlinString(role.namespace)}, owner = ${kotlinString(role.owner)}, scope = ${kotlinString(role.scope)}, status = ${kotlinString(role.status)})`;
+  return renderKotlinCall("AuthzRoleRecord", [
+    ["id", kotlinString(role.id)],
+    ["key", kotlinString(role.key)],
+    ["authorityValue", kotlinString(role.authorityValue)],
+    ["description", kotlinString(role.description)],
+    ["namespace", kotlinString(role.namespace)],
+    ["owner", kotlinString(role.owner)],
+    ["scope", kotlinString(role.scope)],
+    ["status", kotlinString(role.status)]
+  ]);
 }
 
 function renderKotlinClaim(claim) {
   const allowed = claim.allowedAuthorityFormats ?? [];
-  return `AuthzClaimRecord(id = ${kotlinString(claim.id)}, key = ${kotlinString(claim.key)}, name = ${kotlinString(claim.name)}, channel = ${kotlinString(claim.channel)}, valueShape = ${kotlinString(claim.valueShape)}, allowedAuthorityFormats = listOf(${allowed.map(kotlinString).join(", ")}), description = ${kotlinString(claim.description)}, namespace = ${kotlinString(claim.namespace)}, owner = ${kotlinString(claim.owner)}, scope = ${kotlinString(claim.scope)}, status = ${kotlinString(claim.status)})`;
+  return renderKotlinCall("AuthzClaimRecord", [
+    ["id", kotlinString(claim.id)],
+    ["key", kotlinString(claim.key)],
+    ["name", kotlinString(claim.name)],
+    ["channel", kotlinString(claim.channel)],
+    ["valueShape", kotlinString(claim.valueShape)],
+    ["allowedAuthorityFormats", renderKotlinInlineList(allowed.map(kotlinString))],
+    ["description", kotlinString(claim.description)],
+    ["namespace", kotlinString(claim.namespace)],
+    ["owner", kotlinString(claim.owner)],
+    ["scope", kotlinString(claim.scope)],
+    ["status", kotlinString(claim.status)]
+  ]);
 }
 
 function renderKotlinPermission(permission) {
-  return `AuthzPermissionRecord(id = ${kotlinString(permission.id)}, key = ${kotlinString(permission.key)}, authorityValue = ${kotlinString(permission.authorityValue)}, description = ${kotlinString(permission.description)}, namespace = ${kotlinString(permission.namespace)}, owner = ${kotlinString(permission.owner)}, scope = ${kotlinString(permission.scope)}, status = ${kotlinString(permission.status)})`;
+  return renderKotlinCall("AuthzPermissionRecord", [
+    ["id", kotlinString(permission.id)],
+    ["key", kotlinString(permission.key)],
+    ["authorityValue", kotlinString(permission.authorityValue)],
+    ["description", kotlinString(permission.description)],
+    ["namespace", kotlinString(permission.namespace)],
+    ["owner", kotlinString(permission.owner)],
+    ["scope", kotlinString(permission.scope)],
+    ["status", kotlinString(permission.status)]
+  ]);
 }
 
 function renderKotlinGroup(group) {
-  const causes = group.causes.map((cause) => `AuthzGroupCause(type = ${kotlinString(cause.type)}, key = ${kotlinString(cause.key)})`).join(", ");
-  return `AuthzGroupRecord(id = ${kotlinString(group.id)}, key = ${kotlinString(group.key)}, value = ${kotlinString(group.value)}, causes = listOf(${causes}), description = ${kotlinString(group.description)}, namespace = ${kotlinString(group.namespace)}, owner = ${kotlinString(group.owner)}, scope = ${kotlinString(group.scope)}, status = ${kotlinString(group.status)})`;
+  const causes = group.causes.map((cause) =>
+    renderKotlinCall("AuthzGroupCause", [
+      ["type", kotlinString(cause.type)],
+      ["key", kotlinString(cause.key)]
+    ])
+  );
+  return renderKotlinCall("AuthzGroupRecord", [
+    ["id", kotlinString(group.id)],
+    ["key", kotlinString(group.key)],
+    ["value", kotlinString(group.value)],
+    ["causes", renderKotlinExpressionList("listOf", causes)],
+    ["description", kotlinString(group.description)],
+    ["namespace", kotlinString(group.namespace)],
+    ["owner", kotlinString(group.owner)],
+    ["scope", kotlinString(group.scope)],
+    ["status", kotlinString(group.status)]
+  ]);
 }
 
 function renderKotlinHostGate(hostGate) {
-  return `AuthzHostGateRecord(id = ${kotlinString(hostGate.id)}, key = ${kotlinString(hostGate.key)}, permissionKey = ${kotlinString(hostGate.permissionKey)}, aliases = listOf(${hostGate.aliases.map(kotlinString).join(", ")}), description = ${kotlinString(hostGate.description)}, namespace = ${kotlinString(hostGate.namespace)}, owner = ${kotlinString(hostGate.owner)}, scope = ${kotlinString(hostGate.scope)}, status = ${kotlinString(hostGate.status)})`;
+  return renderKotlinCall("AuthzHostGateRecord", [
+    ["id", kotlinString(hostGate.id)],
+    ["key", kotlinString(hostGate.key)],
+    ["permissionKey", kotlinString(hostGate.permissionKey)],
+    ["aliases", renderKotlinInlineList(hostGate.aliases.map(kotlinString))],
+    ["description", kotlinString(hostGate.description)],
+    ["namespace", kotlinString(hostGate.namespace)],
+    ["owner", kotlinString(hostGate.owner)],
+    ["scope", kotlinString(hostGate.scope)],
+    ["status", kotlinString(hostGate.status)]
+  ]);
+}
+
+function renderKotlinPropertyList(name, type, elements, indentSize) {
+  return renderKotlinProperty(name, type, renderKotlinExpressionList("listOf", elements), indentSize);
+}
+
+function renderKotlinPropertyMap(name, type, entries, indentSize) {
+  return renderKotlinProperty(name, type, renderKotlinExpressionList("mapOf", entries), indentSize);
+}
+
+function renderKotlinProperty(name, type, value, indentSize) {
+  const indent = spaces(indentSize);
+  return `${indent}public val ${name}: ${type} =\n${indentBlock(value, indentSize + 4)}`;
+}
+
+function renderKotlinExpressionList(functionName, elements) {
+  if (elements.length === 0) {
+    return `${functionName}()`;
+  }
+  return `${functionName}(\n${elements.map((element) => `${indentBlock(element, 4)},`).join("\n")}\n)`;
+}
+
+function renderKotlinInlineList(elements) {
+  return `listOf(${elements.join(", ")})`;
+}
+
+function renderKotlinCall(name, args) {
+  return `${name}(\n${args.map(([key, value]) => renderKotlinArgument(key, value)).join("\n")}\n)`;
+}
+
+function renderKotlinArgument(key, value) {
+  if (value.includes("\n")) {
+    return `    ${key} =\n${indentBlock(value, 8)},`;
+  }
+  return `    ${key} = ${value},`;
+}
+
+function indentBlock(value, indentSize) {
+  const indent = spaces(indentSize);
+  return value
+    .split("\n")
+    .map((line) => `${indent}${line}`)
+    .join("\n");
+}
+
+function spaces(size) {
+  return " ".repeat(size);
 }
 
 function hostAliasPairs(model) {

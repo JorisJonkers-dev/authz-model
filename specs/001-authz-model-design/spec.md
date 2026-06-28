@@ -2,7 +2,7 @@
 
 ## Overview
 
-ExtraToast/authz-model defines a design-only specification for a shared authorization vocabulary consumed as a versioned artifact by repositories such as personal-stack and website. The vocabulary aligns common role, claim, permission, group, and host-gate names without moving authentication services or site-specific authorization behavior into this repository.
+JorisJonkers-dev/authz-model defines a design-only specification for a shared authorization vocabulary consumed as a versioned artifact by repositories such as personal-stack and website. The vocabulary aligns common role, claim, permission, group, and host-gate names without moving authentication services or site-specific authorization behavior into this repository.
 
 The current reference is the personal-stack auth-api domain, especially `ServicePermission`, `Role`, and `AuthVerificationController`. That reference shows service permissions represented as stable names, roles represented as token/header authorities, optional group claims, and host gates that map incoming hosts to required service permissions. This specification captures the vocabulary contract those consumers can share while preserving each site's own domain model, deployment lifecycle, and authorization evaluators.
 

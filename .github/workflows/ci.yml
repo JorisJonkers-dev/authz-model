@@ -26,6 +26,8 @@ jobs:
 
       - name: Install npm dependencies
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Validate schema and sample
         run: npm run validate

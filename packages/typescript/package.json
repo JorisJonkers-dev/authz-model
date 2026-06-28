@@ -1,5 +1,5 @@
 {
-  "name": "@extratoast/authz-model",
+  "name": "@jorisjonkers-dev/authz-model",
   "version": "0.0.0",
   "type": "module",
   "main": "./dist/authz-vocabulary.js",
