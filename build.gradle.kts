@@ -11,6 +11,6 @@ val releaseVersion =
         .orElse("0.1.0-SNAPSHOT")
 
 allprojects {
-    group = "com.extratoast"
+    group = "dev.jorisjonkers"
     version = releaseVersion.get()
 }

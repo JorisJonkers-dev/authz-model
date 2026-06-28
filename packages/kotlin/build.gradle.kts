@@ -65,8 +65,8 @@ publishing {
             artifactId = "authz-model"
             pom {
                 name.set("authz-model")
-                description.set("Shared authorization vocabulary constants for ExtraToast consumers")
-                url.set("https://github.com/ExtraToast/authz-model")
+                description.set("Shared authorization vocabulary constants for JorisJonkers-dev consumers")
+                url.set("https://github.com/JorisJonkers-dev/authz-model")
                 licenses {
                     license {
                         name.set("MIT")
@@ -75,14 +75,14 @@ publishing {
                 }
                 developers {
                     developer {
-                        id.set("extratoast")
-                        name.set("ExtraToast")
+                        id.set("jorisjonkers-dev")
+                        name.set("JorisJonkers-dev")
                     }
                 }
                 scm {
-                    connection.set("scm:git:https://github.com/ExtraToast/authz-model.git")
-                    developerConnection.set("scm:git:ssh://git@github.com:ExtraToast/authz-model.git")
-                    url.set("https://github.com/ExtraToast/authz-model")
+                    connection.set("scm:git:https://github.com/JorisJonkers-dev/authz-model.git")
+                    developerConnection.set("scm:git:ssh://git@github.com:JorisJonkers-dev/authz-model.git")
+                    url.set("https://github.com/JorisJonkers-dev/authz-model")
                 }
             }
         }
@@ -90,7 +90,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/ExtraToast/authz-model")
+            url = uri("https://maven.pkg.github.com/JorisJonkers-dev/authz-model")
             credentials {
                 username = providers.environmentVariable("GITHUB_ACTOR").orNull
                 password = providers.environmentVariable("GITHUB_TOKEN").orNull

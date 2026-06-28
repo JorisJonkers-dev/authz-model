@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.extratoast.com/authz-model.schema.json",
-  "title": "ExtraToast authorization vocabulary model",
+  "$id": "https://schemas.jorisjonkers.dev/authz-model.schema.json",
+  "title": "JorisJonkers-dev authorization vocabulary model",
   "type": "object",
   "additionalProperties": false,
   "required": [

@@ -1,4 +1,4 @@
-package com.extratoast.authz.model
+package dev.jorisjonkers.authz.model
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -4,10 +4,10 @@
 
 - Source format: JSON vocabulary document validated by JSON Schema draft 2020-12.
 - Generator: Node.js ESM script. It validates the sample with Ajv, performs referential-integrity checks, and emits generated constants for Kotlin and TypeScript.
-- Maven artifact: Kotlin/JVM constants library with coordinate `com.extratoast:authz-model`.
-- TypeScript artifact: package `@extratoast/authz-model` with generated `as const` exports and helper functions.
+- Maven artifact: Kotlin/JVM constants library with coordinate `dev.jorisjonkers:authz-model`.
+- TypeScript artifact: package `@jorisjonkers-dev/authz-model` with generated `as const` exports and helper functions.
 - CI: npm validation/generation/typecheck plus Gradle Kotlin compile/test, ending in a required job named `Pipeline Complete`.
-- Release: release-please workflow plus tag-triggered serial Maven publish and GitHub Packages npm publish.
+- Release: release-please workflow with serial Maven publish and GitHub Packages npm publish from the released tag.
 
 Ajv is used because JSON Schema validation is the core contract under test. The generator remains a small local script rather than a runtime service or build plugin, matching the vocabulary-only boundary.
 
@@ -27,10 +27,10 @@ It does not produce auth services, controllers, filters, token issuance, persist
 1. `schema/authz-model.schema.json` defines vocabulary records and shared metadata.
 2. `model/personal-stack.sample.json` is the initial sample model. It maps the current personal-stack auth-api role names, service permissions, authority formats, claims, groups, and host-gate aliases.
 3. `tools/generator/generate.mjs` loads the schema and model, validates the model, checks cross-record references and duplicate machine values, then writes:
-   - `packages/kotlin/src/generated/kotlin/com/extratoast/authz/model/AuthzVocabulary.kt`
+   - `packages/kotlin/src/generated/kotlin/dev/jorisjonkers/authz/model/AuthzVocabulary.kt`
    - `packages/typescript/src/generated/authz-vocabulary.ts`
 4. The Kotlin package compiles the generated file into the Maven-facing artifact.
-5. The TypeScript package typechecks the generated exports and publishes under `@extratoast`.
+5. The TypeScript package typechecks the generated exports and publishes under `@jorisjonkers-dev`.
 
 Host gates are represented as vocabulary records keyed by alias and required permission. Runtime host parsing remains a consumer responsibility; generated helpers only resolve a provided alias or hostname to a permission key and return null/undefined for unmapped values.
 
@@ -40,7 +40,6 @@ Host gates are represented as vocabulary records keyed by alias and required per
 .github/workflows/
   ci.yml
   release.yml
-  publish-on-tag.yml
 schema/
   authz-model.schema.json
 model/
@@ -51,8 +50,8 @@ tools/generator/
   check-generated.mjs
 packages/kotlin/
   build.gradle.kts
-  src/generated/kotlin/com/extratoast/authz/model/AuthzVocabulary.kt
-  src/test/kotlin/com/extratoast/authz/model/AuthzVocabularyTest.kt
+  src/generated/kotlin/dev/jorisjonkers/authz/model/AuthzVocabulary.kt
+  src/test/kotlin/dev/jorisjonkers/authz/model/AuthzVocabularyTest.kt
 packages/typescript/
   package.json
   tsconfig.json
@@ -74,7 +73,7 @@ package.json
 - FR-7: Group records are separate from roles and permissions and declare emission causes such as `DASHBOARD` permission or `ADMIN` role.
 - FR-8: The generator emits Kotlin and TypeScript constants from the same source model.
 - FR-9: Generated files contain constants and value-format helpers only.
-- FR-10: Maven coordinate `com.extratoast:authz-model` and npm package `@extratoast/authz-model` keep the project name once and avoid plugin marker coordinates.
+- FR-10: Maven coordinate `dev.jorisjonkers:authz-model` and npm package `@jorisjonkers-dev/authz-model` keep the project name once and avoid plugin marker coordinates.
 - FR-11: The model treats personal-stack as a consumer/reference namespace; no personal-stack deployment release semantics are added.
 - FR-12: Schema lifecycle fields support `active`, `deprecated`, `replaced`, and `removed`; deprecated/replaced records can carry replacement metadata.
 
