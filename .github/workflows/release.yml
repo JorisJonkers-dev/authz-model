@@ -1,104 +1,104 @@
-name: Release
+name: 'Release'
 
-on:
+'on':
   push:
     branches:
-      - main
+      - 'main'
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: 'write'
+  pull-requests: 'write'
 
 jobs:
   release:
-    name: Release Please
-    runs-on: ubuntu-latest
+    name: 'Release Please'
+    runs-on: 'ubuntu-latest'
     outputs:
-      release_created: ${{ steps.release-please.outputs.release_created }}
-      tag_name: ${{ steps.release-please.outputs.tag_name }}
+      release_created: '${{ steps.release-please.outputs.release_created }}'
+      tag_name: '${{ steps.release-please.outputs.tag_name }}'
     steps:
       # Author the release PR with the personal-stack-agents App token (not the
       # default GITHUB_TOKEN) so CI runs on the PR without a manual approval
       # gate. Best-effort: falls back to GITHUB_TOKEN when the App secrets or
       # installation are absent.
-      - uses: actions/create-github-app-token@v2
-        id: app-token
+      - uses: 'actions/create-github-app-token@v3'
+        id: 'app-token'
         continue-on-error: true
         with:
-          app-id: ${{ secrets.RELEASE_APP_ID }}
-          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
-      - name: Create or update release
-        id: release-please
-        uses: googleapis/release-please-action@v4
+          app-id: '${{ secrets.RELEASE_APP_ID }}'
+          private-key: '${{ secrets.RELEASE_APP_PRIVATE_KEY }}'
+      - name: 'Create or update release'
+        id: 'release-please'
+        uses: 'googleapis/release-please-action@v5'
         with:
-          token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
-          config-file: release-please-config.json
-          manifest-file: .release-please-manifest.json
+          token: '${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}'
+          config-file: 'release-please-config.json'
+          manifest-file: '.release-please-manifest.json'
 
   publish-maven:
-    name: Publish Maven Artifact
-    runs-on: ubuntu-latest
+    name: 'Publish Maven Artifact'
+    runs-on: 'ubuntu-latest'
     needs: release
-    if: ${{ needs.release.outputs.release_created == 'true' }}
+    if: '${{ needs.release.outputs.release_created == ''true'' }}'
     permissions:
-      contents: read
-      packages: write
+      contents: 'read'
+      packages: 'write'
     steps:
-      - name: Checkout released tag
-        uses: actions/checkout@v4
+      - name: 'Checkout released tag'
+        uses: 'actions/checkout@v6'
         with:
-          ref: ${{ needs.release.outputs.tag_name }}
+          ref: '${{ needs.release.outputs.tag_name }}'
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      - name: 'Setup Java'
+        uses: 'actions/setup-java@v5'
         with:
-          distribution: temurin
-          java-version: "21"
-          cache: gradle
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'gradle'
 
-      - name: Publish Maven artifact
+      - name: 'Publish Maven artifact'
         run: |
           VERSION="${RELEASE_TAG#v}"
           ./gradlew publish -Pversion="$VERSION" --no-daemon --no-parallel --max-workers=1
         env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_TAG: ${{ needs.release.outputs.tag_name }}
+          GITHUB_ACTOR: '${{ github.actor }}'
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          RELEASE_TAG: '${{ needs.release.outputs.tag_name }}'
 
   publish-typescript:
-    name: Publish TypeScript Package
-    runs-on: ubuntu-latest
+    name: 'Publish TypeScript Package'
+    runs-on: 'ubuntu-latest'
     needs: release
-    if: ${{ needs.release.outputs.release_created == 'true' }}
+    if: '${{ needs.release.outputs.release_created == ''true'' }}'
     permissions:
-      contents: read
-      id-token: write
-      packages: write
+      contents: 'read'
+      id-token: 'write'
+      packages: 'write'
     steps:
-      - name: Checkout released tag
-        uses: actions/checkout@v4
+      - name: 'Checkout released tag'
+        uses: 'actions/checkout@v6'
         with:
-          ref: ${{ needs.release.outputs.tag_name }}
+          ref: '${{ needs.release.outputs.tag_name }}'
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: 'Setup Node'
+        uses: 'actions/setup-node@v6'
         with:
-          node-version: "22"
-          registry-url: https://npm.pkg.github.com
-          scope: "@jorisjonkers-dev"
-          cache: npm
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@jorisjonkers-dev'
+          cache: 'npm'
 
-      - name: Install npm dependencies
-        run: npm ci
+      - name: 'Install npm dependencies'
+        run: 'npm ci'
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
-      - name: Publish TypeScript package
+      - name: 'Publish TypeScript package'
         run: |
           VERSION="${RELEASE_TAG#v}"
           npm version "$VERSION" --workspace packages/typescript --no-git-tag-version
           npm run build:typescript
           npm publish --workspace packages/typescript --provenance
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_TAG: ${{ needs.release.outputs.tag_name }}
+          NODE_AUTH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          RELEASE_TAG: '${{ needs.release.outputs.tag_name }}'

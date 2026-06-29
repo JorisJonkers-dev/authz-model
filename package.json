@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "license": "LicenseRef-JorisJonkers-Proprietary-1.0",
   "workspaces": [
     "packages/typescript"
   ],

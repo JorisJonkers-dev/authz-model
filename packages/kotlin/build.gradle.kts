@@ -69,8 +69,8 @@ publishing {
                 url.set("https://github.com/JorisJonkers-dev/authz-model")
                 licenses {
                     license {
-                        name.set("MIT")
-                        url.set("https://opensource.org/licenses/MIT")
+                        name.set("LicenseRef-JorisJonkers-Proprietary-1.0")
+                        url.set("https://github.com/JorisJonkers-dev/authz-model/blob/main/LICENSE")
                     }
                 }
                 developers {
