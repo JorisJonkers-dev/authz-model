@@ -9,37 +9,21 @@ name: 'CI'
 
 permissions:
   contents: 'read'
+  packages: 'read'
 
 jobs:
   vocabulary:
     name: 'Validate Vocabulary'
-    runs-on: 'ubuntu-latest'
-    steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@v6'
-
-      - name: 'Setup Node'
-        uses: 'actions/setup-node@v6'
-        with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: 'Install npm dependencies'
-        run: 'npm ci'
-        env:
-          NODE_AUTH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-
-      - name: 'Validate schema and sample'
-        run: 'npm run validate'
-
-      - name: 'Run generator on sample'
-        run: 'npm run generate -- --output-root "$RUNNER_TEMP/authz-generated"'
-
-      - name: 'Check generated output'
-        run: 'npm run check:generated'
-
-      - name: 'Typecheck TypeScript constants'
-        run: 'npm run typecheck'
+    uses: 'JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@v0.10.2'
+    with:
+      node-version: '22'
+      package-manager: 'npm'
+      install-command: 'npm ci'
+      typecheck-command: 'npm run typecheck'
+      build-command: 'npm run build:typescript'
+      package-check-command: 'npm run validate && npm run generate -- --output-root "$RUNNER_TEMP/authz-generated" && npm run check:generated'
+    secrets:
+      packages-token: '${{ secrets.GITHUB_TOKEN }}'
 
   kotlin:
     name: 'Build Kotlin Artifact'

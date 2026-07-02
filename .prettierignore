@@ -1,0 +1,16 @@
+# Vendored reusable workflow actions tree checked out by shared CI.
+.github-workflows
+
+# Release metadata and generated files not owned by hand formatting.
+.github/workflows
+.release-please-manifest.json
+CHANGELOG.md
+packages/kotlin/src/generated
+packages/typescript/src/generated
+
+# Build output / dependencies.
+build
+coverage
+dist
+node_modules
+packages/typescript/dist
