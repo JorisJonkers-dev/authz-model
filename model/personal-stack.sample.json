@@ -57,10 +57,7 @@
       "name": "roles",
       "channel": "jwt-claim",
       "valueShape": "authority-array",
-      "allowedAuthorityFormats": [
-        "role",
-        "service-permission"
-      ],
+      "allowedAuthorityFormats": ["role", "service-permission"],
       "description": "Token claim carrying role and service-permission authorities.",
       "namespace": "shared",
       "owner": "authz-model",
@@ -181,10 +178,7 @@
       "name": "X-User-Roles",
       "channel": "http-header",
       "valueShape": "comma-separated-authorities",
-      "allowedAuthorityFormats": [
-        "role",
-        "service-permission"
-      ],
+      "allowedAuthorityFormats": ["role", "service-permission"],
       "description": "Forwarded identity header carrying comma-separated authorities.",
       "namespace": "shared",
       "owner": "authz-model",
@@ -433,9 +427,7 @@
       "id": "personal-stack.host-gate.vault",
       "key": "VAULT",
       "permissionKey": "VAULT",
-      "aliases": [
-        "vault"
-      ],
+      "aliases": ["vault"],
       "description": "Host aliases requiring the Vault service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -446,9 +438,7 @@
       "id": "personal-stack.host-gate.mail",
       "key": "MAIL",
       "permissionKey": "MAIL",
-      "aliases": [
-        "stalwart"
-      ],
+      "aliases": ["stalwart"],
       "description": "Host aliases requiring the mail service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -459,9 +449,7 @@
       "id": "personal-stack.host-gate.n8n",
       "key": "N8N",
       "permissionKey": "N8N",
-      "aliases": [
-        "n8n"
-      ],
+      "aliases": ["n8n"],
       "description": "Host aliases requiring the n8n service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -472,9 +460,7 @@
       "id": "personal-stack.host-gate.grafana",
       "key": "GRAFANA",
       "permissionKey": "GRAFANA",
-      "aliases": [
-        "grafana"
-      ],
+      "aliases": ["grafana"],
       "description": "Host aliases requiring the Grafana service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -485,9 +471,7 @@
       "id": "personal-stack.host-gate.dashboard",
       "key": "DASHBOARD",
       "permissionKey": "DASHBOARD",
-      "aliases": [
-        "dashboard"
-      ],
+      "aliases": ["dashboard"],
       "description": "Host aliases requiring the dashboard service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -498,9 +482,7 @@
       "id": "personal-stack.host-gate.traefik",
       "key": "TRAEFIK",
       "permissionKey": "TRAEFIK",
-      "aliases": [
-        "traefik"
-      ],
+      "aliases": ["traefik"],
       "description": "Host aliases requiring the Traefik service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -511,9 +493,7 @@
       "id": "personal-stack.host-gate.rabbitmq",
       "key": "RABBITMQ",
       "permissionKey": "RABBITMQ",
-      "aliases": [
-        "rabbitmq"
-      ],
+      "aliases": ["rabbitmq"],
       "description": "Host aliases requiring the RabbitMQ service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -524,10 +504,7 @@
       "id": "personal-stack.host-gate.assistant",
       "key": "ASSISTANT",
       "permissionKey": "ASSISTANT",
-      "aliases": [
-        "assistant",
-        "assistant-ws"
-      ],
+      "aliases": ["assistant", "assistant-ws"],
       "description": "Host aliases requiring the assistant service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -538,9 +515,7 @@
       "id": "personal-stack.host-gate.status",
       "key": "STATUS",
       "permissionKey": "STATUS",
-      "aliases": [
-        "status"
-      ],
+      "aliases": ["status"],
       "description": "Host aliases requiring the status service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -551,9 +526,7 @@
       "id": "personal-stack.host-gate.jellyfin",
       "key": "JELLYFIN",
       "permissionKey": "JELLYFIN",
-      "aliases": [
-        "jellyfin"
-      ],
+      "aliases": ["jellyfin"],
       "description": "Host aliases requiring the Jellyfin service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -564,9 +537,7 @@
       "id": "personal-stack.host-gate.jellyseerr",
       "key": "JELLYSEERR",
       "permissionKey": "JELLYSEERR",
-      "aliases": [
-        "jellyseerr"
-      ],
+      "aliases": ["jellyseerr"],
       "description": "Host aliases requiring the Jellyseerr service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -577,9 +548,7 @@
       "id": "personal-stack.host-gate.sonarr",
       "key": "SONARR",
       "permissionKey": "SONARR",
-      "aliases": [
-        "sonarr"
-      ],
+      "aliases": ["sonarr"],
       "description": "Host aliases requiring the Sonarr service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -590,9 +559,7 @@
       "id": "personal-stack.host-gate.radarr",
       "key": "RADARR",
       "permissionKey": "RADARR",
-      "aliases": [
-        "radarr"
-      ],
+      "aliases": ["radarr"],
       "description": "Host aliases requiring the Radarr service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -603,9 +570,7 @@
       "id": "personal-stack.host-gate.bazarr",
       "key": "BAZARR",
       "permissionKey": "BAZARR",
-      "aliases": [
-        "bazarr"
-      ],
+      "aliases": ["bazarr"],
       "description": "Host aliases requiring the Bazarr service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -616,9 +581,7 @@
       "id": "personal-stack.host-gate.prowlarr",
       "key": "PROWLARR",
       "permissionKey": "PROWLARR",
-      "aliases": [
-        "prowlarr"
-      ],
+      "aliases": ["prowlarr"],
       "description": "Host aliases requiring the Prowlarr service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -629,9 +592,7 @@
       "id": "personal-stack.host-gate.qbittorrent",
       "key": "QBITTORRENT",
       "permissionKey": "QBITTORRENT",
-      "aliases": [
-        "qbittorrent"
-      ],
+      "aliases": ["qbittorrent"],
       "description": "Host aliases requiring the qBittorrent service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -642,9 +603,7 @@
       "id": "personal-stack.host-gate.immich",
       "key": "IMMICH",
       "permissionKey": "IMMICH",
-      "aliases": [
-        "immich"
-      ],
+      "aliases": ["immich"],
       "description": "Host aliases requiring the Immich service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -655,9 +614,7 @@
       "id": "personal-stack.host-gate.adguard",
       "key": "ADGUARD",
       "permissionKey": "ADGUARD",
-      "aliases": [
-        "adguard"
-      ],
+      "aliases": ["adguard"],
       "description": "Host aliases requiring the AdGuard service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -668,9 +625,7 @@
       "id": "personal-stack.host-gate.wolf",
       "key": "WOLF",
       "permissionKey": "WOLF",
-      "aliases": [
-        "wolf"
-      ],
+      "aliases": ["wolf"],
       "description": "Host aliases requiring the Wolf service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
@@ -681,9 +636,7 @@
       "id": "personal-stack.host-gate.knowledge-api",
       "key": "KNOWLEDGE_API",
       "permissionKey": "KNOWLEDGE_API",
-      "aliases": [
-        "kb"
-      ],
+      "aliases": ["kb"],
       "description": "Host aliases requiring the knowledge API service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",

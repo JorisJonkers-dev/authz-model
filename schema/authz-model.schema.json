@@ -37,11 +37,7 @@
     "authorityFormats": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "rolePrefix",
-        "servicePermissionPrefix",
-        "rolesHeaderSeparator"
-      ],
+      "required": ["rolePrefix", "servicePermissionPrefix", "rolesHeaderSeparator"],
       "properties": {
         "rolePrefix": {
           "type": "string",
@@ -60,19 +56,12 @@
     "artifacts": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "maven",
-        "typescript"
-      ],
+      "required": ["maven", "typescript"],
       "properties": {
         "maven": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "groupId",
-            "artifactId",
-            "packageName"
-          ],
+          "required": ["groupId", "artifactId", "packageName"],
           "properties": {
             "groupId": {
               "type": "string",
@@ -91,9 +80,7 @@
         "typescript": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "packageName"
-          ],
+          "required": ["packageName"],
           "properties": {
             "packageName": {
               "type": "string",
@@ -148,14 +135,7 @@
     },
     "recordMetadata": {
       "type": "object",
-      "required": [
-        "id",
-        "description",
-        "namespace",
-        "owner",
-        "scope",
-        "status"
-      ],
+      "required": ["id", "description", "namespace", "owner", "scope", "status"],
       "properties": {
         "id": {
           "$ref": "#/$defs/id"
@@ -174,19 +154,11 @@
         },
         "scope": {
           "type": "string",
-          "enum": [
-            "shared",
-            "consumer-specific"
-          ]
+          "enum": ["shared", "consumer-specific"]
         },
         "status": {
           "type": "string",
-          "enum": [
-            "active",
-            "deprecated",
-            "replaced",
-            "removed"
-          ]
+          "enum": ["active", "deprecated", "replaced", "removed"]
         },
         "replacementId": {
           "$ref": "#/$defs/id"
@@ -209,10 +181,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "key",
-            "authorityValue"
-          ],
+          "required": ["key", "authorityValue"],
           "properties": {
             "key": {
               "$ref": "#/$defs/upperKey"
@@ -234,12 +203,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "key",
-            "name",
-            "channel",
-            "valueShape"
-          ],
+          "required": ["key", "name", "channel", "valueShape"],
           "properties": {
             "key": {
               "$ref": "#/$defs/claimKey"
@@ -250,11 +214,7 @@
             },
             "channel": {
               "type": "string",
-              "enum": [
-                "jwt-claim",
-                "http-header",
-                "authority"
-              ]
+              "enum": ["jwt-claim", "http-header", "authority"]
             },
             "valueShape": {
               "type": "string",
@@ -272,10 +232,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "role",
-                  "service-permission"
-                ]
+                "enum": ["role", "service-permission"]
               },
               "uniqueItems": true
             }
@@ -292,10 +249,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "key",
-            "authorityValue"
-          ],
+          "required": ["key", "authorityValue"],
           "properties": {
             "key": {
               "$ref": "#/$defs/upperKey"
@@ -312,17 +266,11 @@
     "groupCause": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "type",
-        "key"
-      ],
+      "required": ["type", "key"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "role",
-            "permission"
-          ]
+          "enum": ["role", "permission"]
         },
         "key": {
           "$ref": "#/$defs/upperKey"
@@ -337,11 +285,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "key",
-            "value",
-            "causes"
-          ],
+          "required": ["key", "value", "causes"],
           "properties": {
             "key": {
               "$ref": "#/$defs/upperKey"
@@ -370,11 +314,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "key",
-            "permissionKey",
-            "aliases"
-          ],
+          "required": ["key", "permissionKey", "aliases"],
           "properties": {
             "key": {
               "$ref": "#/$defs/upperKey"

@@ -9,8 +9,5 @@
     "target": "ES2022",
     "verbatimModuleSyntax": true
   },
-  "include": [
-    "src/generated/authz-vocabulary.ts",
-    "src/generated/authz-vocabulary.test-d.ts"
-  ]
+  "include": ["src/generated/authz-vocabulary.ts", "src/generated/authz-vocabulary.test-d.ts"]
 }

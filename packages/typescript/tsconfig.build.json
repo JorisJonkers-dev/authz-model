@@ -1,6 +1,4 @@
 {
   "extends": "./tsconfig.json",
-  "include": [
-    "src/generated/authz-vocabulary.ts"
-  ]
+  "include": ["src/generated/authz-vocabulary.ts"]
 }

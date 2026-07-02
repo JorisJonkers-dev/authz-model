@@ -11,11 +11,19 @@
     "validate": "node tools/generator/validate.mjs",
     "generate": "node tools/generator/generate.mjs",
     "check:generated": "node tools/generator/check-generated.mjs",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "typecheck": "npm --workspace packages/typescript run typecheck",
     "build:typescript": "npm --workspace packages/typescript run build"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "ajv": "^8.17.1",
-    "typescript": "^5.9.3"
+    "eslint": "^10.6.0",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.62.1"
   }
 }
