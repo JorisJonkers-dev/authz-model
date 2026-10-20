@@ -1,30 +1,43 @@
 // Generated from model/personal-stack.sample.json. Do not edit manually.
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const MODEL_ID = "personal-stack.authz";
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const MODEL_VERSION = "0.2.0";
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const ROLE_AUTHORITY_PREFIX = "ROLE_";
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const SERVICE_PERMISSION_AUTHORITY_PREFIX = "SERVICE_";
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const ROLES_HEADER_SEPARATOR = ",";
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const UNMAPPED_HOST_BEHAVIOR = "no-vocabulary-decision";
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const ROLE_KEYS = ["ADMIN", "USER", "READONLY"] as const;
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export type RoleKey = (typeof ROLE_KEYS)[number];
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const RoleKeys = {
   ADMIN: "ADMIN",
   USER: "USER",
   READONLY: "READONLY"
 } as const satisfies Record<string, RoleKey>;
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const RoleAuthorities = {
   ADMIN: "ROLE_ADMIN",
   USER: "ROLE_USER",
   READONLY: "ROLE_READONLY"
 } as const satisfies Record<RoleKey, string>;
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const CLAIM_KEYS = ["roles", "username", "preferredUsername", "email", "emailVerified", "audience", "subject", "tokenType", "groups", "forwardedUserId", "forwardedUserRoles", "forwardedHost"] as const;
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export type ClaimKey = (typeof CLAIM_KEYS)[number];
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const ClaimNames = {
   roles: "roles",
   username: "username",
@@ -40,9 +53,12 @@ export const ClaimNames = {
   forwardedHost: "X-Forwarded-Host"
 } as const satisfies Record<ClaimKey, string>;
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const PERMISSION_KEYS = ["VAULT", "MAIL", "N8N", "GRAFANA", "DASHBOARD", "TRAEFIK", "RABBITMQ", "ASSISTANT", "STATUS", "JELLYFIN", "JELLYSEERR", "SONARR", "RADARR", "BAZARR", "PROWLARR", "QBITTORRENT", "IMMICH", "ADGUARD", "WOLF"] as const;
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export type PermissionKey = (typeof PERMISSION_KEYS)[number];
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const PermissionKeys = {
   VAULT: "VAULT",
   MAIL: "MAIL",
@@ -65,6 +81,7 @@ export const PermissionKeys = {
   WOLF: "WOLF"
 } as const satisfies Record<string, PermissionKey>;
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const PermissionAuthorities = {
   VAULT: "SERVICE_VAULT",
   MAIL: "SERVICE_MAIL",
@@ -87,13 +104,17 @@ export const PermissionAuthorities = {
   WOLF: "SERVICE_WOLF"
 } as const satisfies Record<PermissionKey, string>;
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const GROUP_KEYS = ["K8S_ADMIN"] as const;
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export type GroupKey = (typeof GROUP_KEYS)[number];
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const GroupValues = {
   K8S_ADMIN: "k8s-admin"
 } as const satisfies Record<GroupKey, string>;
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export interface AuthzRoleRecord {
   readonly id: string;
   readonly key: RoleKey;
@@ -105,6 +126,7 @@ export interface AuthzRoleRecord {
   readonly status: "active" | "deprecated" | "replaced" | "removed";
 }
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export interface AuthzClaimRecord {
   readonly id: string;
   readonly key: ClaimKey;
@@ -119,6 +141,7 @@ export interface AuthzClaimRecord {
   readonly status: "active" | "deprecated" | "replaced" | "removed";
 }
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export interface AuthzPermissionRecord {
   readonly id: string;
   readonly key: PermissionKey;
@@ -130,11 +153,13 @@ export interface AuthzPermissionRecord {
   readonly status: "active" | "deprecated" | "replaced" | "removed";
 }
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export interface AuthzGroupCause {
   readonly type: "role" | "permission";
   readonly key: RoleKey | PermissionKey;
 }
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export interface AuthzGroupRecord {
   readonly id: string;
   readonly key: GroupKey;
@@ -147,6 +172,7 @@ export interface AuthzGroupRecord {
   readonly status: "active" | "deprecated" | "replaced" | "removed";
 }
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export interface AuthzHostGateRecord {
   readonly id: string;
   readonly key: PermissionKey;
@@ -159,6 +185,7 @@ export interface AuthzHostGateRecord {
   readonly status: "active" | "deprecated" | "replaced" | "removed";
 }
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const Roles = [
   {
     "id": "shared.role.admin",
@@ -191,6 +218,7 @@ export const Roles = [
     "status": "active"
   }
 ] as const satisfies readonly AuthzRoleRecord[];
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const Claims = [
   {
     "id": "shared.claim.roles",
@@ -355,6 +383,7 @@ export const Claims = [
     "allowedAuthorityFormats": []
   }
 ] as const satisfies readonly AuthzClaimRecord[];
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const Permissions = [
   {
     "id": "personal-stack.permission.vault",
@@ -547,6 +576,7 @@ export const Permissions = [
     "status": "active"
   }
 ] as const satisfies readonly AuthzPermissionRecord[];
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const Groups = [
   {
     "id": "personal-stack.group.k8s-admin",
@@ -569,6 +599,7 @@ export const Groups = [
     "status": "active"
   }
 ] as const satisfies readonly AuthzGroupRecord[];
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const HostGates = [
   {
     "id": "personal-stack.host-gate.vault",
@@ -820,6 +851,7 @@ export const HostGates = [
   }
 ] as const satisfies readonly AuthzHostGateRecord[];
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export const HostGateAliases = {
   "vault": "VAULT",
   "stalwart": "MAIL",
@@ -843,14 +875,17 @@ export const HostGateAliases = {
   "wolf": "WOLF"
 } as const satisfies Record<string, PermissionKey>;
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export function roleAuthority(key: RoleKey | string): string {
   return ROLE_AUTHORITY_PREFIX + key;
 }
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export function servicePermissionAuthority(key: PermissionKey | string): string {
   return SERVICE_PERMISSION_AUTHORITY_PREFIX + key;
 }
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export function permissionKeyForHostAlias(alias: string | null | undefined): PermissionKey | undefined {
   const normalized = alias?.trim().toLowerCase();
   if (!normalized) {
@@ -859,6 +894,7 @@ export function permissionKeyForHostAlias(alias: string | null | undefined): Per
   return HostGateAliases[normalized as keyof typeof HostGateAliases];
 }
 
+/** @deprecated authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates. */
 export function permissionKeyForHost(host: string | null | undefined): PermissionKey | undefined {
   return permissionKeyForHostAlias(host?.split(".")[0]);
 }

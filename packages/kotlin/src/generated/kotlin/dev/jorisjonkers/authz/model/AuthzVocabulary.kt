@@ -2,6 +2,7 @@
 
 package dev.jorisjonkers.authz.model
 
+@Deprecated("authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates.")
 public data class AuthzRoleRecord(
     public val id: String,
     public val key: String,
@@ -13,6 +14,7 @@ public data class AuthzRoleRecord(
     public val status: String,
 )
 
+@Deprecated("authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates.")
 public data class AuthzClaimRecord(
     public val id: String,
     public val key: String,
@@ -27,6 +29,7 @@ public data class AuthzClaimRecord(
     public val status: String,
 )
 
+@Deprecated("authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates.")
 public data class AuthzPermissionRecord(
     public val id: String,
     public val key: String,
@@ -38,11 +41,13 @@ public data class AuthzPermissionRecord(
     public val status: String,
 )
 
+@Deprecated("authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates.")
 public data class AuthzGroupCause(
     public val type: String,
     public val key: String,
 )
 
+@Deprecated("authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates.")
 public data class AuthzGroupRecord(
     public val id: String,
     public val key: String,
@@ -55,6 +60,7 @@ public data class AuthzGroupRecord(
     public val status: String,
 )
 
+@Deprecated("authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates.")
 public data class AuthzHostGateRecord(
     public val id: String,
     public val key: String,
@@ -67,6 +73,7 @@ public data class AuthzHostGateRecord(
     public val status: String,
 )
 
+@Deprecated("authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates.")
 public object AuthzVocabulary {
     public const val MODEL_ID: String = "personal-stack.authz"
     public const val MODEL_VERSION: String = "0.2.0"
