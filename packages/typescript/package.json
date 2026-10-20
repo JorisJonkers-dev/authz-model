@@ -1,6 +1,7 @@
 {
   "name": "@jorisjonkers-dev/authz-model",
   "version": "0.0.0",
+  "description": "Deprecated: legacy auth-api's vocabulary. Use identity's Principal contract through @jorisjonkers-dev/principal.",
   "type": "module",
   "license": "LicenseRef-JorisJonkers-Proprietary-1.0",
   "main": "./dist/authz-vocabulary.js",

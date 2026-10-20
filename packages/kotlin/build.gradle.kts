@@ -65,7 +65,7 @@ publishing {
             artifactId = "authz-model"
             pom {
                 name.set("authz-model")
-                description.set("Shared authorization vocabulary constants for JorisJonkers-dev consumers")
+                description.set("Deprecated: legacy auth-api's vocabulary. Use identity's Principal contract through kotlin-spring-commons' identity adapter.")
                 url.set("https://github.com/JorisJonkers-dev/authz-model")
                 licenses {
                     license {

@@ -7,6 +7,8 @@ import { validateModel } from './validate.mjs'
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const KOTLIN_OUTPUT = 'packages/kotlin/src/generated/kotlin/dev/jorisjonkers/authz/model/AuthzVocabulary.kt'
 const TYPESCRIPT_OUTPUT = 'packages/typescript/src/generated/authz-vocabulary.ts'
+const DEPRECATION =
+  "authz-model is legacy auth-api's vocabulary. Read identity's Principal contract through your language's commons adapter, with the App Roles deploy-kit generates."
 
 export async function generate({
   rootDir = ROOT_DIR,
@@ -18,11 +20,11 @@ export async function generate({
   const outputs = [
     {
       path: KOTLIN_OUTPUT,
-      content: renderKotlin(model),
+      content: deprecateKotlin(renderKotlin(model)),
     },
     {
       path: TYPESCRIPT_OUTPUT,
-      content: renderTypeScript(model),
+      content: deprecateTypeScript(renderTypeScript(model)),
     },
   ]
 
@@ -33,6 +35,14 @@ export async function generate({
   }
 
   return outputs
+}
+
+function deprecateKotlin(source) {
+  return source.replace(/^public (data class|object) /gm, `@Deprecated(${kotlinString(DEPRECATION)})\npublic $1 `)
+}
+
+function deprecateTypeScript(source) {
+  return source.replace(/^export (const|function|type|interface) /gm, `/** @deprecated ${DEPRECATION} */\nexport $1 `)
 }
 
 function renderKotlin(model) {
