@@ -14,7 +14,7 @@ permissions:
 jobs:
   vocabulary:
     name: 'Validate Vocabulary'
-    uses: 'JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@v0.10.2'
+    uses: 'JorisJonkers-dev/github-workflows/.github/workflows/node-ci.yml@870429202376dac2e9434746941c54f9a2be605f' # v0.33.0
     with:
       node-version: '22'
       package-manager: 'npm'
