@@ -17,10 +17,10 @@ class AuthzVocabularyTest {
     fun `service permission authority constants match helper format`() {
         assertEquals("SERVICE_DASHBOARD", AuthzVocabulary.PermissionAuthorities.DASHBOARD)
         assertEquals(
-            "SERVICE_KNOWLEDGE_API",
-            AuthzVocabulary.servicePermissionAuthority(AuthzVocabulary.PermissionKeys.KNOWLEDGE_API),
+            "SERVICE_WOLF",
+            AuthzVocabulary.servicePermissionAuthority(AuthzVocabulary.PermissionKeys.WOLF),
         )
-        assertEquals(20, AuthzVocabulary.PermissionKeys.ALL.size)
+        assertEquals(19, AuthzVocabulary.PermissionKeys.ALL.size)
     }
 
     @Test
@@ -30,10 +30,15 @@ class AuthzVocabularyTest {
             AuthzVocabulary.PermissionKeys.ASSISTANT,
             AuthzVocabulary.permissionKeyForHost("assistant-ws.example.test"),
         )
-        assertEquals(AuthzVocabulary.PermissionKeys.KNOWLEDGE_API, AuthzVocabulary.permissionKeyForHostAlias("kb"))
+        assertEquals(AuthzVocabulary.PermissionKeys.WOLF, AuthzVocabulary.permissionKeyForHostAlias("wolf"))
         assertNull(AuthzVocabulary.permissionKeyForHost("unknown.example.test"))
         assertNull(AuthzVocabulary.permissionKeyForHost(null))
         assertNull(AuthzVocabulary.permissionKeyForHost(""))
+    }
+
+    @Test
+    fun `the retired knowledge base host is no longer gated`() {
+        assertNull(AuthzVocabulary.permissionKeyForHostAlias("kb"))
     }
 
     @Test
