@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/JorisJonkers-dev/authz-model/compare/v0.1.2...v0.2.0) (2026-10-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* PermissionKeys.KNOWLEDGE_API, PermissionAuthorities.KNOWLEDGE_API (SERVICE_KNOWLEDGE_API) and the kb host alias are removed from both packages.
+
+### Features
+
+* drop the retired KNOWLEDGE_API permission and kb host gate ([#16](https://github.com/JorisJonkers-dev/authz-model/issues/16)) ([51c0315](https://github.com/JorisJonkers-dev/authz-model/commit/51c031570db7d76323f270e233752f66c5f68a51))
+
 ## [0.1.2](https://github.com/JorisJonkers-dev/authz-model/compare/v0.1.1...v0.1.2) (2026-06-29)
 
 
