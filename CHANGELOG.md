@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/JorisJonkers-dev/authz-model/compare/v0.2.0...v0.3.0) (2026-10-20)
+
+
+### Features
+
+* deprecate the vocabulary in favour of identity's Principal contract ([#18](https://github.com/JorisJonkers-dev/authz-model/issues/18)) ([4bf5890](https://github.com/JorisJonkers-dev/authz-model/commit/4bf58909a1f8f34a2bb85add4cb8d1be20b5bd6b))
+
 ## [0.2.0](https://github.com/JorisJonkers-dev/authz-model/compare/v0.1.2...v0.2.0) (2026-10-20)
 
 
