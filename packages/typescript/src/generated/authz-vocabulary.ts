@@ -1,7 +1,7 @@
 // Generated from model/personal-stack.sample.json. Do not edit manually.
 
 export const MODEL_ID = "personal-stack.authz";
-export const MODEL_VERSION = "0.1.0";
+export const MODEL_VERSION = "0.2.0";
 export const ROLE_AUTHORITY_PREFIX = "ROLE_";
 export const SERVICE_PERMISSION_AUTHORITY_PREFIX = "SERVICE_";
 export const ROLES_HEADER_SEPARATOR = ",";
@@ -40,7 +40,7 @@ export const ClaimNames = {
   forwardedHost: "X-Forwarded-Host"
 } as const satisfies Record<ClaimKey, string>;
 
-export const PERMISSION_KEYS = ["VAULT", "MAIL", "N8N", "GRAFANA", "DASHBOARD", "TRAEFIK", "RABBITMQ", "ASSISTANT", "STATUS", "JELLYFIN", "JELLYSEERR", "SONARR", "RADARR", "BAZARR", "PROWLARR", "QBITTORRENT", "IMMICH", "ADGUARD", "WOLF", "KNOWLEDGE_API"] as const;
+export const PERMISSION_KEYS = ["VAULT", "MAIL", "N8N", "GRAFANA", "DASHBOARD", "TRAEFIK", "RABBITMQ", "ASSISTANT", "STATUS", "JELLYFIN", "JELLYSEERR", "SONARR", "RADARR", "BAZARR", "PROWLARR", "QBITTORRENT", "IMMICH", "ADGUARD", "WOLF"] as const;
 export type PermissionKey = (typeof PERMISSION_KEYS)[number];
 
 export const PermissionKeys = {
@@ -62,8 +62,7 @@ export const PermissionKeys = {
   QBITTORRENT: "QBITTORRENT",
   IMMICH: "IMMICH",
   ADGUARD: "ADGUARD",
-  WOLF: "WOLF",
-  KNOWLEDGE_API: "KNOWLEDGE_API"
+  WOLF: "WOLF"
 } as const satisfies Record<string, PermissionKey>;
 
 export const PermissionAuthorities = {
@@ -85,8 +84,7 @@ export const PermissionAuthorities = {
   QBITTORRENT: "SERVICE_QBITTORRENT",
   IMMICH: "SERVICE_IMMICH",
   ADGUARD: "SERVICE_ADGUARD",
-  WOLF: "SERVICE_WOLF",
-  KNOWLEDGE_API: "SERVICE_KNOWLEDGE_API"
+  WOLF: "SERVICE_WOLF"
 } as const satisfies Record<PermissionKey, string>;
 
 export const GROUP_KEYS = ["K8S_ADMIN"] as const;
@@ -547,16 +545,6 @@ export const Permissions = [
     "owner": "personal-stack/auth-api",
     "scope": "consumer-specific",
     "status": "active"
-  },
-  {
-    "id": "personal-stack.permission.knowledge-api",
-    "key": "KNOWLEDGE_API",
-    "authorityValue": "SERVICE_KNOWLEDGE_API",
-    "description": "Access vocabulary entry for the knowledge API service.",
-    "namespace": "personal-stack",
-    "owner": "personal-stack/auth-api",
-    "scope": "consumer-specific",
-    "status": "active"
   }
 ] as const satisfies readonly AuthzPermissionRecord[];
 export const Groups = [
@@ -829,19 +817,6 @@ export const HostGates = [
     "owner": "personal-stack/auth-api",
     "scope": "consumer-specific",
     "status": "active"
-  },
-  {
-    "id": "personal-stack.host-gate.knowledge-api",
-    "key": "KNOWLEDGE_API",
-    "permissionKey": "KNOWLEDGE_API",
-    "aliases": [
-      "kb"
-    ],
-    "description": "Host aliases requiring the knowledge API service permission.",
-    "namespace": "personal-stack",
-    "owner": "personal-stack/auth-api",
-    "scope": "consumer-specific",
-    "status": "active"
   }
 ] as const satisfies readonly AuthzHostGateRecord[];
 
@@ -865,8 +840,7 @@ export const HostGateAliases = {
   "qbittorrent": "QBITTORRENT",
   "immich": "IMMICH",
   "adguard": "ADGUARD",
-  "wolf": "WOLF",
-  "kb": "KNOWLEDGE_API"
+  "wolf": "WOLF"
 } as const satisfies Record<string, PermissionKey>;
 
 export function roleAuthority(key: RoleKey | string): string {

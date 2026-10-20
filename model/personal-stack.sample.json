@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "modelId": "personal-stack.authz",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared authorization vocabulary sample derived from the personal-stack auth-api domain.",
   "authorityFormats": {
     "rolePrefix": "ROLE_",
@@ -388,16 +388,6 @@
       "owner": "personal-stack/auth-api",
       "scope": "consumer-specific",
       "status": "active"
-    },
-    {
-      "id": "personal-stack.permission.knowledge-api",
-      "key": "KNOWLEDGE_API",
-      "authorityValue": "SERVICE_KNOWLEDGE_API",
-      "description": "Access vocabulary entry for the knowledge API service.",
-      "namespace": "personal-stack",
-      "owner": "personal-stack/auth-api",
-      "scope": "consumer-specific",
-      "status": "active"
     }
   ],
   "groups": [
@@ -627,17 +617,6 @@
       "permissionKey": "WOLF",
       "aliases": ["wolf"],
       "description": "Host aliases requiring the Wolf service permission.",
-      "namespace": "personal-stack",
-      "owner": "personal-stack/auth-api",
-      "scope": "consumer-specific",
-      "status": "active"
-    },
-    {
-      "id": "personal-stack.host-gate.knowledge-api",
-      "key": "KNOWLEDGE_API",
-      "permissionKey": "KNOWLEDGE_API",
-      "aliases": ["kb"],
-      "description": "Host aliases requiring the knowledge API service permission.",
       "namespace": "personal-stack",
       "owner": "personal-stack/auth-api",
       "scope": "consumer-specific",

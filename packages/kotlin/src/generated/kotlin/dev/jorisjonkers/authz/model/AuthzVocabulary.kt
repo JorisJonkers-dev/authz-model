@@ -69,7 +69,7 @@ public data class AuthzHostGateRecord(
 
 public object AuthzVocabulary {
     public const val MODEL_ID: String = "personal-stack.authz"
-    public const val MODEL_VERSION: String = "0.1.0"
+    public const val MODEL_VERSION: String = "0.2.0"
     public const val ROLE_AUTHORITY_PREFIX: String = "ROLE_"
     public const val SERVICE_PERMISSION_AUTHORITY_PREFIX: String = "SERVICE_"
     public const val ROLES_HEADER_SEPARATOR: String = ","
@@ -160,7 +160,6 @@ public object AuthzVocabulary {
         public const val IMMICH: String = "IMMICH"
         public const val ADGUARD: String = "ADGUARD"
         public const val WOLF: String = "WOLF"
-        public const val KNOWLEDGE_API: String = "KNOWLEDGE_API"
         public val ALL: List<String> =
             listOf(
                 VAULT,
@@ -182,7 +181,6 @@ public object AuthzVocabulary {
                 IMMICH,
                 ADGUARD,
                 WOLF,
-                KNOWLEDGE_API,
             )
     }
 
@@ -206,7 +204,6 @@ public object AuthzVocabulary {
         public const val IMMICH: String = "SERVICE_IMMICH"
         public const val ADGUARD: String = "SERVICE_ADGUARD"
         public const val WOLF: String = "SERVICE_WOLF"
-        public const val KNOWLEDGE_API: String = "SERVICE_KNOWLEDGE_API"
         public val ALL: List<String> =
             listOf(
                 VAULT,
@@ -228,7 +225,6 @@ public object AuthzVocabulary {
                 IMMICH,
                 ADGUARD,
                 WOLF,
-                KNOWLEDGE_API,
             )
     }
 
@@ -631,16 +627,6 @@ public object AuthzVocabulary {
                     scope = "consumer-specific",
                     status = "active",
                 ),
-                AuthzPermissionRecord(
-                    id = "personal-stack.permission.knowledge-api",
-                    key = "KNOWLEDGE_API",
-                    authorityValue = "SERVICE_KNOWLEDGE_API",
-                    description = "Access vocabulary entry for the knowledge API service.",
-                    namespace = "personal-stack",
-                    owner = "personal-stack/auth-api",
-                    scope = "consumer-specific",
-                    status = "active",
-                ),
             )
     }
 
@@ -883,17 +869,6 @@ public object AuthzVocabulary {
                     scope = "consumer-specific",
                     status = "active",
                 ),
-                AuthzHostGateRecord(
-                    id = "personal-stack.host-gate.knowledge-api",
-                    key = "KNOWLEDGE_API",
-                    permissionKey = "KNOWLEDGE_API",
-                    aliases = listOf("kb"),
-                    description = "Host aliases requiring the knowledge API service permission.",
-                    namespace = "personal-stack",
-                    owner = "personal-stack/auth-api",
-                    scope = "consumer-specific",
-                    status = "active",
-                ),
             )
         public val ALIAS_TO_PERMISSION_KEY: Map<String, String> =
             mapOf(
@@ -917,7 +892,6 @@ public object AuthzVocabulary {
                 "immich" to PermissionKeys.IMMICH,
                 "adguard" to PermissionKeys.ADGUARD,
                 "wolf" to PermissionKeys.WOLF,
-                "kb" to PermissionKeys.KNOWLEDGE_API,
             )
     }
 }
